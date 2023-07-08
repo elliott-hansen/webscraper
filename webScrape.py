@@ -12,6 +12,28 @@ def createCsvWithData(array, csvname):
     df.to_csv(csvname)
     print("\n\n"+Back.GREEN + " = = Successfully generated CSV File = = " + Style.RESET_ALL + "\n\n")
 
+def insertIntoExcel(csvfile, url):
+    print(Back.GREEN + " = = = Attempting to insert data into Excel doc... = = = " + Style.RESET_ALL + "\n")
+    dataArray = []
+    with open(csvfile) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=",")
+        first = 1
+        counter = 0
+        for row in csv_reader:
+            if(first):
+                first = 0
+                counter +=1
+                continue
+            dataArray.append[row[2]]
+            counter +=1
+    xl = pandas.read_excel(url, sheet_name="2023 Clinics")
+    j = 2
+    for i in range(0, 66):
+        xl.iloc[3, [j]] = dataArray[i]
+        j+=7
+    xl.to_excel(url)
+    print(Back.GREEN + " = = = Success! = = = " + Style.RESET_ALL + "\n")
+
 def generateCensusLinks():
     links = []
     states = {
@@ -74,7 +96,7 @@ def generateCensusLinks():
             'AE': 'Armed Forces Africa/Canada/Europe/Middle East',
             'AP': 'Armed Forces Pacific'
             }
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0,len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -131,7 +153,7 @@ def generateFips(state):
               
 def scrapePrematureDeaths():
         dataArray = {}
-        xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+        xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
         counties = xl.loc[1:]
         for i in range(0, len(counties) - 1):
             county = counties.iloc[i].values[0]
@@ -172,7 +194,7 @@ def scrapePrematureDeaths():
     
 def scrapePhysicalUnhealthyDays():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -206,7 +228,7 @@ def scrapePhysicalUnhealthyDays():
 
 def scrapeMentalUnhealthyDays():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -240,7 +262,7 @@ def scrapeMentalUnhealthyDays():
 
 def scrapeDiabetes():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -274,7 +296,7 @@ def scrapeDiabetes():
 
 def scrapeNotPhysicallyActive():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -308,7 +330,7 @@ def scrapeNotPhysicallyActive():
 
 def scrapeAdultsSmoking():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -342,7 +364,7 @@ def scrapeAdultsSmoking():
 
 def scrapeExcessiveDrinking():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -376,7 +398,7 @@ def scrapeExcessiveDrinking():
 
 def scrapeHIV():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -410,7 +432,7 @@ def scrapeHIV():
 
 def scrapeChlamydia():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -445,7 +467,7 @@ def scrapeChlamydia():
 
 def scrapeBirthWeight():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -480,7 +502,7 @@ def scrapeBirthWeight():
 
 def scrapeTeenBirths():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -516,7 +538,7 @@ def scrapeTeenBirths():
 #Strange ratio, not sure how to convert?
 def scrapePrimaryCarePhysicians():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -552,7 +574,7 @@ def scrapePrimaryCarePhysicians():
 #ditto
 def scrapeMentalHealthProviders():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -588,7 +610,7 @@ def scrapeMentalHealthProviders():
 #ditto x2
 def scrapeDentistsData():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -623,7 +645,7 @@ def scrapeDentistsData():
 
 def scrapeRecentMammograms():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -658,7 +680,7 @@ def scrapeRecentMammograms():
 
 def scrapeSomeCollege():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -693,7 +715,7 @@ def scrapeSomeCollege():
 
 def scrapeSomeAssociations():
     dataArray = {}
-    xl = pandas.read_excel("2020-2023 RAM Clinic Locations (County-Level Data) (1).xlsx", sheet_name="Counties of RAM Clinics", usecols="H")
+    xl = pandas.read_excel(DATAURL, sheet_name="Counties of RAM Clinics", usecols="H")
     counties = xl.loc[1:]
     for i in range(0, len(counties) - 1):
         county = counties.iloc[i].values[0]
@@ -766,6 +788,10 @@ if __name__ == "__main__":
     global SLEEPTIME
     print(" - | Enter a time for the program to wait before pulling data. The larger the number the more successful hits (i've had the best result with 0.8)")
     SLEEPTIME = float(input(" >> "))
+    global DATAURL
+    print(" - | Enter the exact name of the excel file in the folder (i.e: \"data.xlsx\")")
+    DATAURL = str(input(" >> "))
+
 
     # print(Back.GREEN + " = = = Getting Premature Death Data = = = \n\n" + Style.RESET_ALL)
     # prematureDeaths = scrapePrematureDeaths()
@@ -773,6 +799,7 @@ if __name__ == "__main__":
     print(Back.GREEN + " = = = Getting Physically Unhealthy Data = = = \n\n" + Style.RESET_ALL)
     physUnhealthy = scrapePhysicalUnhealthyDays()
     createCsvWithData(physUnhealthy, "Phyiscally Unhealthy Data")
+    insertIntoExcel(DATAURL, "Phyiscally Unhealthy Data")
 
     # print(Back.GREEN + " = = = Getting Mentally Unhealthy Data = = = \n\n" + Style.RESET_ALL)
     # mentallyUnhealthy = scrapeMentalUnhealthyDays()
